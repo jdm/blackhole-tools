@@ -1,0 +1,142 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: blackholebugzilla@gmail.com
+Received: by 10.112.149.104 with SMTP id tz8csp86367lbb;
+        Sun, 26 May 2013 14:13:30 -0700 (PDT)
+X-Received: by 10.66.252.4 with SMTP id zo4mr27618737pac.100.1369602809430;
+        Sun, 26 May 2013 14:13:29 -0700 (PDT)
+Return-Path: <bugzilla-daemon@mozilla.org>
+Received: from smtp.mozilla.org (mx1.corp.phx1.mozilla.com. [63.245.216.69])
+        by mx.google.com with ESMTP id tr9si18092533pbc.103.2013.05.26.14.13.28
+        for <blackholebugzilla@gmail.com>;
+        Sun, 26 May 2013 14:13:29 -0700 (PDT)
+Received-SPF: neutral (google.com: 63.245.216.69 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) client-ip=63.245.216.69;
+Authentication-Results: mx.google.com;
+       spf=neutral (google.com: 63.245.216.69 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) smtp.mail=bugzilla-daemon@mozilla.org
+X-Virus-Scanned: amavisd-new at mozilla.org
+Received: from jobqueue1.bugs.scl3.mozilla.com (nat-bugs.scl3.mozilla.com [63.245.214.161])
+	by mx1.mail.corp.phx1.mozilla.com (Postfix) with ESMTP id 751BFF235C
+	for <blackholebugzilla@gmail.com>; Sun, 26 May 2013 14:13:28 -0700 (PDT)
+Received: by jobqueue1.bugs.scl3.mozilla.com (Postfix, from userid 0)
+	id 612B0140DED; Sun, 26 May 2013 14:13:28 -0700 (PDT)
+From: bugzilla-daemon@mozilla.org
+To: blackholebugzilla@gmail.com
+Subject: [Bug 866847] Implement Map#forEach and Set#forEach
+Date: Sun, 26 May 2013 21:13:24 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: Component-Watcher
+X-Bugzilla-Classification: Components
+X-Bugzilla-ID: 866847
+X-Bugzilla-Product: Core
+X-Bugzilla-Component: JavaScript Engine
+X-Bugzilla-Version: Trunk
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: evilpies@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: --
+X-Bugzilla-Assigned-To: sankha93@gmail.com
+X-Bugzilla-Target-Milestone: ---
+X-Bugzilla-Flags: 
+X-Bugzilla-OS: Linux
+X-Bugzilla-Changed-Fields: 
+X-Bugzilla-Changed-Field-Names: 
+Message-ID: <bug-866847-470714-H0MJw1tNcg@https.bugzilla.mozilla.org/>
+In-Reply-To: <bug-866847-470714@https.bugzilla.mozilla.org/>
+References: <bug-866847-470714@https.bugzilla.mozilla.org/>
+X-Generated-By:
+ web5.bugs.scl3.mozilla.com/jobqueue1.bugs.scl3.mozilla.com(8273)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: https://bugzilla.mozilla.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+
+Do not reply to this email. You can add comments to this bug at
+https://bugzilla.mozilla.org/show_bug.cgi?id=3D866847
+
+--- Comment #3 from Tom Schuster [:evilpie] <evilpies@gmail.com> 2013-05-26=
+ 14:13:24 PDT ---
+Comment on attachment 754272
+  --> https://bugzilla.mozilla.org/attachment.cgi?id=3D754272
+patch v1
+
+Review of attachment 754272:
+ --> (https://bugzilla.mozilla.org/page.cgi?id=3Dsplinter.html&bug=3D866847=
+&attachment=3D754272)
+-----------------------------------------------------------------
+
+The comments apply to Set as well. Seems like without a support function to=
+ get
+the real iterator or the underlying elements is impossible to correctly
+implement. One idea would be to save the Map.prototype.iterator in the self
+hosting global and use that.
+
+::: js/src/builtin/Map.js
+@@ +4,5 @@
+> +
+> +/* ES6 20121122 draft 15.5.4.21. */
+> +
+> +function Map_forEach(callbackfn, thisArg =3D undefined) {
+> +	var M =3D this;
+
+Indention looks wrong.
+
+@@ +5,5 @@
+> +/* ES6 20121122 draft 15.5.4.21. */
+> +
+> +function Map_forEach(callbackfn, thisArg =3D undefined) {
+> +	var M =3D this;
+> +	if(typeof M !=3D "object")
+
+typeof m also returns "object" for |null|
+
+@@ +9,5 @@
+> +	if(typeof M !=3D "object")
+> +		ThrowError(JSMSG_BAD_TYPE);
+> +	if (!IsCallable(callbackfn))
+> +        ThrowError(JSMSG_NOT_FUNCTION, DecompileArg(0, callbackfn));
+> +    var entries =3D [...M];
+
+This is actually observable when somebody overrides Map.prototype.iterator.=
+ You
+need to write some functions that allows you iterate the map object. Maybe =
+it
+would be easier to implement this in C++ after all.
+
+::: js/src/jit-test/tests/collections/Map-forEach.js
+@@ +1,2 @@
+> +// test Map.prototype.forEach
+> +
+
+You need to check more failure conditions.
+
+Eg. Step 2. and 3. If |this| is not a Map. Try calling with eg. Set etc.
+Step 5. Try passing a function that is not callable=20
+Step 6. Check that the callbacked gets passed the thisvalue and also check =
+if
+we get undefined if no parameter is supplied to forEach.
+
+Try throwing an error in the callback.
+
+@@ +2,5 @@
+> +
+> +var testMap =3D new Map();
+> +
+> +function callback(entry, map) {
+> +	testMap.set(entry[1], entry[0]);
+
+We always use 4 spaces for indent.
+
+--=20
+Configure bugmail: https://bugzilla.mozilla.org/userprefs.cgi?tab=3Demail
+
+-------------------------------
+Product/Component: Core :: JavaScript Engine
+
+
+------- You are receiving this mail because: -------
+You are watching the component for the bug.=
+===EXPECTED===
+{'source': 'bugzilla', 'extra': {'component': 'JavaScript Engine', 'fields': '', 'product': 'Core', 'values': {}, 'id': 866847}, 'email': 'evilpies@gmail.com', 'datetime': datetime.datetime(2013, 5, 26, 17, 13, 24)}

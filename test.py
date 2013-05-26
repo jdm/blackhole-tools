@@ -11,12 +11,13 @@ for f in os.listdir("tests"):
     fp.close()
     contents = contents.split("===EXPECTED===")
     msg = email.message_from_string(contents[0])
-    bug_data = utils.extract_bug_data(msg)
-    if str(bug_data) == contents[1]:
+    bug_data = utils.extract_bug_info(msg)
+    expected = contents[1].strip()
+    if str(bug_data) == expected:
         passes += 1
     else:
         failures += 1
-        print "Got |" + str(bug_data) + "|, expected |" + contents[1] + "|"
+        print "Got |" + str(bug_data) + "|, expected |" + expected + "|"
 
 print "%d tests run, %d failed" % (passes + failures, failures)
 sys.exit(failures)

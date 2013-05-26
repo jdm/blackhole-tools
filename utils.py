@@ -5,6 +5,7 @@ import re
 import os
 import datetime
 import email
+import ConfigParser
 from email.parser import Parser
 
 config = ConfigParser.ConfigParser()
