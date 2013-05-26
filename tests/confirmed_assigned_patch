@@ -1,0 +1,101 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: blackholebugzilla@gmail.com
+Received: by 10.112.149.104 with SMTP id tz8csp83891lbb;
+        Sun, 26 May 2013 13:04:20 -0700 (PDT)
+X-Received: by 10.69.0.226 with SMTP id bb2mr26636675pbd.34.1369598659571;
+        Sun, 26 May 2013 13:04:19 -0700 (PDT)
+Return-Path: <bugzilla-daemon@mozilla.org>
+Received: from smtp.mozilla.org (mx2.corp.phx1.mozilla.com. [63.245.216.70])
+        by mx.google.com with ESMTP id sk3si18902984pab.174.2013.05.26.13.04.18
+        for <blackholebugzilla@gmail.com>;
+        Sun, 26 May 2013 13:04:19 -0700 (PDT)
+Received-SPF: neutral (google.com: 63.245.216.70 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) client-ip=63.245.216.70;
+Authentication-Results: mx.google.com;
+       spf=neutral (google.com: 63.245.216.70 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) smtp.mail=bugzilla-daemon@mozilla.org
+X-Virus-Scanned: amavisd-new at mozilla.org
+Received: from jobqueue2.bugs.scl3.mozilla.com (nat-bugs.scl3.mozilla.com [63.245.214.161])
+	by mx2.mail.corp.phx1.mozilla.com (Postfix) with ESMTP id B23EBF22DA
+	for <blackholebugzilla@gmail.com>; Sun, 26 May 2013 13:04:18 -0700 (PDT)
+Received: by jobqueue2.bugs.scl3.mozilla.com (Postfix, from userid 0)
+	id 906A26E146D; Sun, 26 May 2013 13:04:18 -0700 (PDT)
+From: bugzilla-daemon@mozilla.org
+To: blackholebugzilla@gmail.com
+Subject: [Bug 494797] Thunderbird RSS should have a per feed limit per
+ download (don't download feeds with 250k items)
+Date: Sun, 26 May 2013 20:04:14 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: Component-Watcher
+X-Bugzilla-Classification: Components
+X-Bugzilla-ID: 494797
+X-Bugzilla-Product: MailNews Core
+X-Bugzilla-Component: Feed Reader
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: enhancement
+X-Bugzilla-Who: alta88@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: --
+X-Bugzilla-Assigned-To: alta88@gmail.com
+X-Bugzilla-Target-Milestone: ---
+X-Bugzilla-Flags: 
+X-Bugzilla-OS: All
+X-Bugzilla-Changed-Fields: AssignedTo Ever Confirmed Flags Status Attachment
+ Created
+X-Bugzilla-Changed-Field-Names: assigned_to everconfirmed flagtypes.name
+ bug_status attachment.created
+Message-ID: <bug-494797-470714-Hw4drpMQID@https.bugzilla.mozilla.org/>
+In-Reply-To: <bug-494797-470714@https.bugzilla.mozilla.org/>
+References: <bug-494797-470714@https.bugzilla.mozilla.org/>
+X-Generated-By:
+ web2.bugs.scl3.mozilla.com/jobqueue2.bugs.scl3.mozilla.com(12119)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: https://bugzilla.mozilla.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+
+Do not reply to this email. You can add comments to this bug at
+https://bugzilla.mozilla.org/show_bug.cgi?id=3D494797
+
+alta88 <alta88@gmail.com> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+           Assignee|nobody@mozilla.org          |alta88@gmail.com
+     Ever confirmed|0                           |1
+ Attachment #754267|                            |review?(mkmelin+mozilla@iki
+              Flags|                            |.fi)
+             Status|UNCONFIRMED                 |NEW
+
+--- Comment #1 from alta88 <alta88@gmail.com> 2013-05-26 13:04:14 PDT ---
+Created attachment 754267
+  --> https://bugzilla.mozilla.org/attachment.cgi?id=3D754267&action=3Dedit
+patch
+
+
+Not testing for 0 or =E2=88=9E is never good.
+
+This patch:
+1. Prompts for confirmation on a new subscribe if the feed file item count >
+100.
+2. Prompts if a feed update contains > 1000 items; prompts are stacked.
+3. Enables a cancel; fixes false prompt and non cancel on subscribe dialog
+close (Bug 349049).
+4. Fixes strict js message.
+5. Logs gecko xml parsing errors.  This and the validation link should fini=
+sh
+off any "it's thunderbird's fault" type support issue.
+
+--=20
+Configure bugmail: https://bugzilla.mozilla.org/userprefs.cgi?tab=3Demail
+
+-------------------------------
+Product/Component: MailNews Core :: Feed Reader
+
+
+------- You are receiving this mail because: -------
+You are watching the component for the bug.=
+===EXPECTED===
+{'source': 'bugzilla', 'extra': {'component': 'Feed Reader', 'fields': ['assigned_to', 'everconfirmed', 'flagtypes_name', 'bug_status', 'attachment_created'], 'product': 'MailNews Core', 'values': {'bug_status': 'NEW', 'assigned_to': 'alta88@gmail.com'}, 'id': 494797}, 'email': 'alta88@gmail.com', 'datetime': datetime.datetime(2013, 5, 26, 16, 4, 14)}

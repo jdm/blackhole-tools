@@ -1,0 +1,105 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: blackholebugzilla@gmail.com
+Received: by 10.112.149.104 with SMTP id tz8csp83741lbb;
+        Sun, 26 May 2013 12:52:48 -0700 (PDT)
+X-Received: by 10.66.253.74 with SMTP id zy10mr26794186pac.123.1369597967490;
+        Sun, 26 May 2013 12:52:47 -0700 (PDT)
+Return-Path: <bugzilla-daemon@mozilla.org>
+Received: from smtp.mozilla.org (mx1.corp.phx1.mozilla.com. [63.245.216.69])
+        by mx.google.com with ESMTP id hz3si14409878pbb.217.2013.05.26.12.52.46
+        for <blackholebugzilla@gmail.com>;
+        Sun, 26 May 2013 12:52:47 -0700 (PDT)
+Received-SPF: neutral (google.com: 63.245.216.69 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) client-ip=63.245.216.69;
+Authentication-Results: mx.google.com;
+       spf=neutral (google.com: 63.245.216.69 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) smtp.mail=bugzilla-daemon@mozilla.org
+X-Virus-Scanned: amavisd-new at mozilla.org
+Received: from jobqueue2.bugs.scl3.mozilla.com (nat-bugs.scl3.mozilla.com [63.245.214.161])
+	by mx1.mail.corp.phx1.mozilla.com (Postfix) with ESMTP id 9E49DF2303
+	for <blackholebugzilla@gmail.com>; Sun, 26 May 2013 12:52:46 -0700 (PDT)
+Received: by jobqueue2.bugs.scl3.mozilla.com (Postfix, from userid 0)
+	id 857A86E1467; Sun, 26 May 2013 12:52:46 -0700 (PDT)
+From: bugzilla-daemon@mozilla.org
+To: blackholebugzilla@gmail.com
+Subject: [Bug 876283] New: pdf viewer automaticely ask to print pdf form
+ instead of open it
+Date: Sun, 26 May 2013 19:52:41 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: Component-Watcher
+X-Bugzilla-Classification: Client Software
+X-Bugzilla-ID: 876283
+X-Bugzilla-Product: Firefox
+X-Bugzilla-Component: Untriaged
+X-Bugzilla-Version: 21 Branch
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: el.cameleon.1@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: --
+X-Bugzilla-Assigned-To: nobody@mozilla.org
+X-Bugzilla-Target-Milestone: ---
+X-Bugzilla-Flags: 
+X-Bugzilla-OS: Linux
+X-Bugzilla-Changed-Fields: Bug # Summary Classification Product Version
+ Platform OS/Version Status Severity Priority Component AssignedTo ReportedBy
+X-Bugzilla-Changed-Field-Names: bug_id short_desc classification product
+ version rep_platform op_sys bug_status bug_severity priority component
+ assigned_to reporter
+Message-ID: <bug-876283-470714@https.bugzilla.mozilla.org/>
+X-Generated-By:
+ web2.bugs.scl3.mozilla.com/jobqueue2.bugs.scl3.mozilla.com(9803)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Bugzilla-URL: https://bugzilla.mozilla.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+
+Do not reply to this email. You can add comments to this bug at
+https://bugzilla.mozilla.org/show_bug.cgi?id=876283
+
+            Bug ID: 876283
+           Summary: pdf viewer automaticely ask to print pdf form instead
+                    of open it
+    Classification: Client Software
+           Product: Firefox
+           Version: 21 Branch
+          Hardware: x86
+                OS: Linux
+            Status: NEW
+          Severity: normal
+          Priority: --
+         Component: Untriaged
+          Assignee: nobody@mozilla.org
+          Reporter: el.cameleon.1@gmail.com
+
+User Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:21.0) Gecko/20100101
+Firefox/21.0 (Beta/Release)
+Build ID: 20130512193902
+
+Steps to reproduce:
+
+open this french pdf form:
+http://www.impots.gouv.fr/portal/deploiement/p1/fichedescriptiveformulaire_3167/fichedescriptiveformulaire_3167.pdf
+
+
+Actual results:
+
+a windows asks me to print the pdf file
+
+
+Expected results:
+
+nothing, the file should just have been opened without any printing dialog
+
+-- 
+Configure bugmail: https://bugzilla.mozilla.org/userprefs.cgi?tab=email
+
+-------------------------------
+Product/Component: Firefox :: Untriaged
+
+
+------- You are receiving this mail because: -------
+You are watching the component for the bug.
+===EXPECTED===
+{'source': 'bugzilla', 'extra': {'product': 'Firefox', 'fields': ['bug_id', 'short_desc', 'classification', 'product', 'version', 'rep_platform', 'op_sys', 'bug_status', 'bug_severity', 'priority', 'component', 'assigned_to', 'reporter'], 'component': 'Untriaged', 'values': {'priority': '--', 'bug_status': 'NEW', 'version': '21 Branch', 'op_sys': 'Linux', 'assigned_to': 'nobody@mozilla.org'}, 'new': True, 'id': 876283}, 'email': 'el.cameleon.1@gmail.com', 'datetime': datetime.datetime(2013, 5, 26, 15, 52, 41)}

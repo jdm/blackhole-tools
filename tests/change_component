@@ -1,0 +1,76 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: blackholebugzilla@gmail.com
+Received: by 10.112.149.104 with SMTP id tz8csp83747lbb;
+        Sun, 26 May 2013 12:53:08 -0700 (PDT)
+X-Received: by 10.68.176.37 with SMTP id cf5mr26505732pbc.173.1369597988012;
+        Sun, 26 May 2013 12:53:08 -0700 (PDT)
+Return-Path: <bugzilla-daemon@mozilla.org>
+Received: from smtp.mozilla.org (mx1.corp.phx1.mozilla.com. [63.245.216.69])
+        by mx.google.com with ESMTP id pt5si18905281pac.69.2013.05.26.12.53.07
+        for <blackholebugzilla@gmail.com>;
+        Sun, 26 May 2013 12:53:08 -0700 (PDT)
+Received-SPF: neutral (google.com: 63.245.216.69 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) client-ip=63.245.216.69;
+Authentication-Results: mx.google.com;
+       spf=neutral (google.com: 63.245.216.69 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) smtp.mail=bugzilla-daemon@mozilla.org
+X-Virus-Scanned: amavisd-new at mozilla.org
+Received: from jobqueue1.bugs.scl3.mozilla.com (nat-bugs.scl3.mozilla.com [63.245.214.161])
+	by mx1.mail.corp.phx1.mozilla.com (Postfix) with ESMTP id 3DC52F242B
+	for <blackholebugzilla@gmail.com>; Sun, 26 May 2013 12:53:07 -0700 (PDT)
+Received: by jobqueue1.bugs.scl3.mozilla.com (Postfix, from userid 0)
+	id 35BA8140E2F; Sun, 26 May 2013 12:53:07 -0700 (PDT)
+From: bugzilla-daemon@mozilla.org
+To: blackholebugzilla@gmail.com
+Subject: [Bug 876283] pdf viewer automaticely ask to print pdf form instead
+ of open it
+Date: Sun, 26 May 2013 19:53:03 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: Component-Watcher
+X-Bugzilla-Classification: Client Software
+X-Bugzilla-ID: 876283
+X-Bugzilla-Product: Firefox
+X-Bugzilla-Component: PDF Viewer
+X-Bugzilla-Version: 21 Branch
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: el.cameleon.1@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: --
+X-Bugzilla-Assigned-To: nobody@mozilla.org
+X-Bugzilla-Target-Milestone: ---
+X-Bugzilla-Flags: 
+X-Bugzilla-OS: Linux
+X-Bugzilla-Changed-Fields: Component
+X-Bugzilla-Changed-Field-Names: component
+Message-ID: <bug-876283-470714-h7x4TkCGfX@https.bugzilla.mozilla.org/>
+In-Reply-To: <bug-876283-470714@https.bugzilla.mozilla.org/>
+References: <bug-876283-470714@https.bugzilla.mozilla.org/>
+X-Generated-By:
+ web1.bugs.scl3.mozilla.com/jobqueue1.bugs.scl3.mozilla.com(30077)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: https://bugzilla.mozilla.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+
+Do not reply to this email. You can add comments to this bug at
+https://bugzilla.mozilla.org/show_bug.cgi?id=3D876283
+
+Vincent (cam=C3=A9l=C3=A9on) <el.cameleon.1@gmail.com> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+          Component|Untriaged                   |PDF Viewer
+
+--=20
+Configure bugmail: https://bugzilla.mozilla.org/userprefs.cgi?tab=3Demail
+
+-------------------------------
+Product/Component: Firefox :: PDF Viewer
+
+
+------- You are receiving this mail because: -------
+You are watching the component for the bug.
+===EXPECTED===
+{'source': 'bugzilla', 'extra': {'component': 'PDF Viewer', 'fields': ['component'], 'product': 'Firefox', 'values': {}, 'id': 876283}, 'email': 'el.cameleon.1@gmail.com', 'datetime': datetime.datetime(2013, 5, 26, 15, 53, 3)}
