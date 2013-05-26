@@ -17,7 +17,7 @@ for f in os.listdir("tests"):
         passes += 1
     else:
         failures += 1
-        print "Got |" + str(bug_data) + "|, expected |" + expected + "|"
+        print "%s\n  Got |%s|, expected |%s|" % (f, str(bug_data), expected)
 
 print "%d tests run, %d failed" % (passes + failures, failures)
 sys.exit(failures)

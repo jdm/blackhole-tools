@@ -1,0 +1,93 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: blackholebugzilla@gmail.com
+Received: by 10.112.149.104 with SMTP id tz8csp86246lbb;
+        Sun, 26 May 2013 14:05:01 -0700 (PDT)
+X-Received: by 10.66.27.243 with SMTP id w19mr20373997pag.180.1369602300272;
+        Sun, 26 May 2013 14:05:00 -0700 (PDT)
+Return-Path: <bugzilla-daemon@mozilla.org>
+Received: from smtp.mozilla.org (mx2.corp.phx1.mozilla.com. [63.245.216.70])
+        by mx.google.com with ESMTP id yh2si18994414pab.119.2013.05.26.14.04.59
+        for <blackholebugzilla@gmail.com>;
+        Sun, 26 May 2013 14:05:00 -0700 (PDT)
+Received-SPF: neutral (google.com: 63.245.216.70 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) client-ip=63.245.216.70;
+Authentication-Results: mx.google.com;
+       spf=neutral (google.com: 63.245.216.70 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) smtp.mail=bugzilla-daemon@mozilla.org
+X-Virus-Scanned: amavisd-new at mozilla.org
+Received: from jobqueue1.bugs.scl3.mozilla.com (nat-bugs.scl3.mozilla.com [63.245.214.161])
+	by mx2.mail.corp.phx1.mozilla.com (Postfix) with ESMTP id 632C4F2331
+	for <blackholebugzilla@gmail.com>; Sun, 26 May 2013 14:04:59 -0700 (PDT)
+Received: by jobqueue1.bugs.scl3.mozilla.com (Postfix, from userid 0)
+	id 50A2F140E0E; Sun, 26 May 2013 14:04:59 -0700 (PDT)
+From: bugzilla-daemon@mozilla.org
+To: blackholebugzilla@gmail.com
+Subject: [Bug 875790] crash in js::CloneScript on startup when adblock plus
+ is enabled
+Date: Sun, 26 May 2013 21:04:53 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: Component-Watcher
+X-Bugzilla-Classification: Components
+X-Bugzilla-ID: 875790
+X-Bugzilla-Product: Core
+X-Bugzilla-Component: JavaScript Engine
+X-Bugzilla-Version: 24 Branch
+X-Bugzilla-Keywords: crash, regression, reproducible, topcrash
+X-Bugzilla-Severity: blocker
+X-Bugzilla-Who: octoploid@yandex.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: --
+X-Bugzilla-Assigned-To: general@js.bugs
+X-Bugzilla-Target-Milestone: ---
+X-Bugzilla-Flags: 
+X-Bugzilla-OS: All
+X-Bugzilla-Changed-Fields: Flags
+X-Bugzilla-Changed-Field-Names: flagtypes.name
+Message-ID: <bug-875790-470714-1VPWkEM6ug@https.bugzilla.mozilla.org/>
+In-Reply-To: <bug-875790-470714@https.bugzilla.mozilla.org/>
+References: <bug-875790-470714@https.bugzilla.mozilla.org/>
+X-Generated-By:
+ web2.bugs.scl3.mozilla.com/jobqueue1.bugs.scl3.mozilla.com(7479)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Bugzilla-URL: https://bugzilla.mozilla.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+X-Bugzilla-Tracking: status-firefox23:unaffected tracking-firefox24:+
+ status-firefox24:affected
+
+Do not reply to this email. You can add comments to this bug at
+https://bugzilla.mozilla.org/show_bug.cgi?id=875790
+
+Octoploid <octoploid@yandex.com> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+ Attachment #754265|                            |review?(bobbyholley+bmo@gma
+              Flags|                            |il.com)
+
+--- Comment #31 from Octoploid <octoploid@yandex.com> 2013-05-26 14:04:53 PDT ---
+Comment on attachment 754265
+  --> https://bugzilla.mozilla.org/attachment.cgi?id=754265
+Updated fix
+
+(In reply to Andrew McCreight [:mccr8] from comment #30)
+> https://tbpl.mozilla.org/?tree=Try&rev=339d5f15afe2
+
+Everything's green this time.
+
+-- 
+Configure bugmail: https://bugzilla.mozilla.org/userprefs.cgi?tab=email
+
+-------------------------------
+Product/Component: Core :: JavaScript Engine
+
+------- Tracking Flags: -------
+status-firefox23:unaffected
+tracking-firefox24:+
+status-firefox24:affected
+
+------- You are receiving this mail because: -------
+You are watching the component for the bug.
+===EXPECTED===
+{'source': 'bugzilla', 'extra': {'component': 'JavaScript Engine', 'fields': ['flagtypes_name'], 'product': 'Core', 'values': {}, 'id': 875790}, 'email': 'octoploid@yandex.com', 'datetime': datetime.datetime(2013, 5, 26, 17, 4, 53)}

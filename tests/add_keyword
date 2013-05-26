@@ -1,0 +1,75 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: blackholebugzilla@gmail.com
+Received: by 10.112.149.104 with SMTP id tz8csp85730lbb;
+        Sun, 26 May 2013 13:43:21 -0700 (PDT)
+X-Received: by 10.68.129.234 with SMTP id nz10mr26472344pbb.181.1369601000908;
+        Sun, 26 May 2013 13:43:20 -0700 (PDT)
+Return-Path: <bugzilla-daemon@mozilla.org>
+Received: from smtp.mozilla.org (mx2.corp.phx1.mozilla.com. [63.245.216.70])
+        by mx.google.com with ESMTP id tq5si18988543pab.1.2013.05.26.13.43.20
+        for <blackholebugzilla@gmail.com>;
+        Sun, 26 May 2013 13:43:20 -0700 (PDT)
+Received-SPF: neutral (google.com: 63.245.216.70 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) client-ip=63.245.216.70;
+Authentication-Results: mx.google.com;
+       spf=neutral (google.com: 63.245.216.70 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) smtp.mail=bugzilla-daemon@mozilla.org
+X-Virus-Scanned: amavisd-new at mozilla.org
+Received: from jobqueue1.bugs.scl3.mozilla.com (nat-bugs.scl3.mozilla.com [63.245.214.161])
+	by mx2.mail.corp.phx1.mozilla.com (Postfix) with ESMTP id BB265F22D4
+	for <blackholebugzilla@gmail.com>; Sun, 26 May 2013 13:43:19 -0700 (PDT)
+Received: by jobqueue1.bugs.scl3.mozilla.com (Postfix, from userid 0)
+	id B2FB0140E0D; Sun, 26 May 2013 13:43:19 -0700 (PDT)
+From: bugzilla-daemon@mozilla.org
+To: blackholebugzilla@gmail.com
+Subject: [Bug 871326] archive settings made for identities are not saved
+Date: Sun, 26 May 2013 20:43:17 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: Component-Watcher
+X-Bugzilla-Classification: Components
+X-Bugzilla-ID: 871326
+X-Bugzilla-Product: MailNews Core
+X-Bugzilla-Component: Account Manager
+X-Bugzilla-Version: 17
+X-Bugzilla-Keywords: checkin-needed
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: acelists@atlas.sk
+X-Bugzilla-Status: ASSIGNED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: --
+X-Bugzilla-Assigned-To: acelists@atlas.sk
+X-Bugzilla-Target-Milestone: ---
+X-Bugzilla-Flags: 
+X-Bugzilla-OS: All
+X-Bugzilla-Changed-Fields: Keywords
+X-Bugzilla-Changed-Field-Names: keywords
+Message-ID: <bug-871326-470714-R8iq9cf3Gs@https.bugzilla.mozilla.org/>
+In-Reply-To: <bug-871326-470714@https.bugzilla.mozilla.org/>
+References: <bug-871326-470714@https.bugzilla.mozilla.org/>
+X-Generated-By:
+ web5.bugs.scl3.mozilla.com/jobqueue1.bugs.scl3.mozilla.com(3741)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Bugzilla-URL: https://bugzilla.mozilla.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+
+Do not reply to this email. You can add comments to this bug at
+https://bugzilla.mozilla.org/show_bug.cgi?id=871326
+
+:aceman <acelists@atlas.sk> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+           Keywords|                            |checkin-needed
+
+-- 
+Configure bugmail: https://bugzilla.mozilla.org/userprefs.cgi?tab=email
+
+-------------------------------
+Product/Component: MailNews Core :: Account Manager
+
+
+------- You are receiving this mail because: -------
+You are watching the component for the bug.
+===EXPECTED===
+{'source': 'bugzilla', 'extra': {'component': 'Account Manager', 'fields': ['keywords'], 'product': 'MailNews Core', 'values': {'keywords': ['checkin_needed']}, 'id': 871326}, 'email': 'acelists@atlas.sk', 'datetime': datetime.datetime(2013, 5, 26, 16, 43, 17)}

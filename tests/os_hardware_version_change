@@ -1,0 +1,77 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: blackholebugzilla@gmail.com
+Received: by 10.112.149.104 with SMTP id tz8csp82777lbb;
+        Sun, 26 May 2013 11:56:54 -0700 (PDT)
+X-Received: by 10.68.129.234 with SMTP id nz10mr26226634pbb.181.1369594613258;
+        Sun, 26 May 2013 11:56:53 -0700 (PDT)
+Return-Path: <bugzilla-daemon@mozilla.org>
+Received: from smtp.mozilla.org (mx2.corp.phx1.mozilla.com. [63.245.216.70])
+        by mx.google.com with ESMTP id ql7si18506763pbc.56.2013.05.26.11.56.52
+        for <blackholebugzilla@gmail.com>;
+        Sun, 26 May 2013 11:56:53 -0700 (PDT)
+Received-SPF: neutral (google.com: 63.245.216.70 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) client-ip=63.245.216.70;
+Authentication-Results: mx.google.com;
+       spf=neutral (google.com: 63.245.216.70 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) smtp.mail=bugzilla-daemon@mozilla.org
+X-Virus-Scanned: amavisd-new at mozilla.org
+Received: from jobqueue2.bugs.scl3.mozilla.com (nat-bugs.scl3.mozilla.com [63.245.214.161])
+	by mx2.mail.corp.phx1.mozilla.com (Postfix) with ESMTP id 56DE4F22DA
+	for <blackholebugzilla@gmail.com>; Sun, 26 May 2013 11:56:52 -0700 (PDT)
+Received: by jobqueue2.bugs.scl3.mozilla.com (Postfix, from userid 0)
+	id 2A0E16E1467; Sun, 26 May 2013 11:56:52 -0700 (PDT)
+From: bugzilla-daemon@mozilla.org
+To: blackholebugzilla@gmail.com
+Subject: [Bug 876212] implement OTR encryption into emails
+Date: Sun, 26 May 2013 18:56:50 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: Component-Watcher
+X-Bugzilla-Classification: Client Software
+X-Bugzilla-ID: 876212
+X-Bugzilla-Product: Thunderbird
+X-Bugzilla-Component: Untriaged
+X-Bugzilla-Version: 17
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: mozilla@spacetrace.org
+X-Bugzilla-Status: UNCONFIRMED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: --
+X-Bugzilla-Assigned-To: nobody@mozilla.org
+X-Bugzilla-Target-Milestone: ---
+X-Bugzilla-Flags: 
+X-Bugzilla-OS: All
+X-Bugzilla-Changed-Fields: OS/Version Platform Version
+X-Bugzilla-Changed-Field-Names: op_sys rep_platform version
+Message-ID: <bug-876212-470714-mIHBICIC6J@https.bugzilla.mozilla.org/>
+In-Reply-To: <bug-876212-470714@https.bugzilla.mozilla.org/>
+References: <bug-876212-470714@https.bugzilla.mozilla.org/>
+X-Generated-By:
+ web3.bugs.scl3.mozilla.com/jobqueue2.bugs.scl3.mozilla.com(1267)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Bugzilla-URL: https://bugzilla.mozilla.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+
+Do not reply to this email. You can add comments to this bug at
+https://bugzilla.mozilla.org/show_bug.cgi?id=876212
+
+Ruben <mozilla@spacetrace.org> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+                 OS|Linux                       |All
+           Hardware|x86_64                      |All
+            Version|16                          |17
+
+-- 
+Configure bugmail: https://bugzilla.mozilla.org/userprefs.cgi?tab=email
+
+-------------------------------
+Product/Component: Thunderbird :: Untriaged
+
+
+------- You are receiving this mail because: -------
+You are watching the component for the bug.
+===EXPECTED===
+{'source': 'bugzilla', 'extra': {'component': 'Untriaged', 'fields': ['op_sys', 'rep_platform', 'version'], 'product': 'Thunderbird', 'values': {'version': '17', 'op_sys': 'All'}, 'id': 876212}, 'email': 'mozilla@spacetrace.org', 'datetime': datetime.datetime(2013, 5, 26, 14, 56, 50)}

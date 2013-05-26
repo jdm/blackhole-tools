@@ -1,0 +1,85 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: blackholebugzilla@gmail.com
+Received: by 10.112.149.104 with SMTP id tz8csp86306lbb;
+        Sun, 26 May 2013 14:08:58 -0700 (PDT)
+X-Received: by 10.66.219.68 with SMTP id pm4mr2802914pac.59.1369602537832;
+        Sun, 26 May 2013 14:08:57 -0700 (PDT)
+Return-Path: <bugzilla-daemon@mozilla.org>
+Received: from smtp.mozilla.org (mx1.corp.phx1.mozilla.com. [63.245.216.69])
+        by mx.google.com with ESMTP id pu9si18660372pbb.243.2013.05.26.14.08.57
+        for <blackholebugzilla@gmail.com>;
+        Sun, 26 May 2013 14:08:57 -0700 (PDT)
+Received-SPF: neutral (google.com: 63.245.216.69 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) client-ip=63.245.216.69;
+Authentication-Results: mx.google.com;
+       spf=neutral (google.com: 63.245.216.69 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) smtp.mail=bugzilla-daemon@mozilla.org
+X-Virus-Scanned: amavisd-new at mozilla.org
+Received: from jobqueue2.bugs.scl3.mozilla.com (nat-bugs.scl3.mozilla.com [63.245.214.161])
+	by mx1.mail.corp.phx1.mozilla.com (Postfix) with ESMTP id B4619F235C
+	for <blackholebugzilla@gmail.com>; Sun, 26 May 2013 14:08:56 -0700 (PDT)
+Received: by jobqueue2.bugs.scl3.mozilla.com (Postfix, from userid 0)
+	id 99B056E1438; Sun, 26 May 2013 14:08:56 -0700 (PDT)
+From: bugzilla-daemon@mozilla.org
+To: blackholebugzilla@gmail.com
+Subject: [Bug 645416] Implement symbols
+Date: Sun, 26 May 2013 21:08:51 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: Component-Watcher
+X-Bugzilla-Classification: Components
+X-Bugzilla-ID: 645416
+X-Bugzilla-Product: Core
+X-Bugzilla-Component: JavaScript Engine
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: dherman@mozilla.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: --
+X-Bugzilla-Assigned-To: ejpbruel@mozilla.com
+X-Bugzilla-Target-Milestone: ---
+X-Bugzilla-Flags: 
+X-Bugzilla-OS: Mac OS X
+X-Bugzilla-Changed-Fields: Flags
+X-Bugzilla-Changed-Field-Names: flagtypes.name
+Message-ID: <bug-645416-470714-yqow9MZMKw@https.bugzilla.mozilla.org/>
+In-Reply-To: <bug-645416-470714@https.bugzilla.mozilla.org/>
+References: <bug-645416-470714@https.bugzilla.mozilla.org/>
+X-Generated-By:
+ web2.bugs.scl3.mozilla.com/jobqueue2.bugs.scl3.mozilla.com(22672)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Bugzilla-URL: https://bugzilla.mozilla.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+
+Do not reply to this email. You can add comments to this bug at
+https://bugzilla.mozilla.org/show_bug.cgi?id=645416
+
+Dave Herman [:dherman] <dherman@mozilla.com> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+              Flags|needinfo?(dherman@mozilla.c |
+                   |om)                         |
+
+--- Comment #36 from Dave Herman [:dherman] <dherman@mozilla.com> 2013-05-26 14:08:51 PDT ---
+> In the future we probably want other primitives, so I think we should take
+> the time and design something that allows this to happen.
+
+Not too much time, please -- symbols are depended on by multiple other
+features, including for-of, generators, classes, and super.
+
+Dave
+
+-- 
+Configure bugmail: https://bugzilla.mozilla.org/userprefs.cgi?tab=email
+
+-------------------------------
+Product/Component: Core :: JavaScript Engine
+
+
+------- You are receiving this mail because: -------
+You are watching the component for the bug.
+===EXPECTED===
+{'source': 'bugzilla', 'extra': {'component': 'JavaScript Engine', 'fields': ['flagtypes_name'], 'product': 'Core', 'values': {}, 'id': 645416}, 'email': 'dherman@mozilla.com', 'datetime': datetime.datetime(2013, 5, 26, 17, 8, 51)}

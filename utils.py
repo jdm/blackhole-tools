@@ -28,7 +28,7 @@ FIELD_NAME_TO_HEADER = {
     'assigned_to': 'x-bugzilla-assigned-to',
     'severity': 'x-bugzilla-severity',
     'version': 'x-bugzilla-version',
-    'op-sys': 'x-bugzilla-os',
+    'op_sys': 'x-bugzilla-os',
     'priority': 'x-bugzilla-priority',
     'target_milestone': 'x-bugzilla-target-milestone'
 }
