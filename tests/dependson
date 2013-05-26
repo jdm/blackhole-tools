@@ -1,0 +1,80 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: blackholebugzilla@gmail.com
+Received: by 10.112.149.104 with SMTP id tz8csp83730lbb;
+        Sun, 26 May 2013 12:51:50 -0700 (PDT)
+X-Received: by 10.68.17.8 with SMTP id k8mr26884995pbd.102.1369597910245;
+        Sun, 26 May 2013 12:51:50 -0700 (PDT)
+Return-Path: <bugzilla-daemon@mozilla.org>
+Received: from smtp.mozilla.org (mx2.corp.phx1.mozilla.com. [63.245.216.70])
+        by mx.google.com with ESMTP id wn4si17898397pbc.205.2013.05.26.12.51.49
+        for <blackholebugzilla@gmail.com>;
+        Sun, 26 May 2013 12:51:50 -0700 (PDT)
+Received-SPF: neutral (google.com: 63.245.216.70 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) client-ip=63.245.216.70;
+Authentication-Results: mx.google.com;
+       spf=neutral (google.com: 63.245.216.70 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) smtp.mail=bugzilla-daemon@mozilla.org
+X-Virus-Scanned: amavisd-new at mozilla.org
+Received: from jobqueue2.bugs.scl3.mozilla.com (nat-bugs.scl3.mozilla.com [63.245.214.161])
+	by mx2.mail.corp.phx1.mozilla.com (Postfix) with ESMTP id 2B74CF23D6
+	for <blackholebugzilla@gmail.com>; Sun, 26 May 2013 12:51:49 -0700 (PDT)
+Received: by jobqueue2.bugs.scl3.mozilla.com (Postfix, from userid 0)
+	id 0C8096E147C; Sun, 26 May 2013 12:51:48 -0700 (PDT)
+From: bugzilla-daemon@mozilla.org
+To: blackholebugzilla@gmail.com
+Subject: [Bug 775235] [Meta] Unprefix CSS and DOM properties
+Date: Sun, 26 May 2013 19:51:30 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: Component-Watcher
+X-Bugzilla-Classification: Components
+X-Bugzilla-ID: 775235
+X-Bugzilla-Product: Core
+X-Bugzilla-Component: Layout
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: meta
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: evilpies@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: --
+X-Bugzilla-Assigned-To: nobody@mozilla.org
+X-Bugzilla-Target-Milestone: ---
+X-Bugzilla-Flags: 
+X-Bugzilla-OS: All
+X-Bugzilla-Changed-Fields: Depends on
+X-Bugzilla-Changed-Field-Names: dependson
+Message-ID: <bug-775235-470714-HqP5FD7tTj@https.bugzilla.mozilla.org/>
+In-Reply-To: <bug-775235-470714@https.bugzilla.mozilla.org/>
+References: <bug-775235-470714@https.bugzilla.mozilla.org/>
+X-Generated-By:
+ web3.bugs.scl3.mozilla.com/jobqueue2.bugs.scl3.mozilla.com(9650)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Bugzilla-URL: https://bugzilla.mozilla.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+
+Do not reply to this email. You can add comments to this bug at
+https://bugzilla.mozilla.org/show_bug.cgi?id=775235
+
+Tom Schuster [:evilpie] <evilpies@gmail.com> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+         Depends on|                            |876282
+
+Referenced Bugs:
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=876282
+[Bug 876282] Add unprefixed cancelAnimationFrame
+
+-- 
+Configure bugmail: https://bugzilla.mozilla.org/userprefs.cgi?tab=email
+
+-------------------------------
+Product/Component: Core :: Layout
+
+
+------- You are receiving this mail because: -------
+You are watching the component for the bug.
+===EXPECTED===
+{'source': 'bugzilla', 'extra': {'component': 'Layout', 'fields': ['dependson'], 'product': 'Core', 'values': {}, 'id': 775235}, 'email': 'evilpies@gmail.com', 'datetime': datetime.datetime(2013, 5, 26, 15, 51, 30)}

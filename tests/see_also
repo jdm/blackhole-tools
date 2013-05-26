@@ -1,0 +1,77 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: blackholebugzilla@gmail.com
+Received: by 10.112.149.104 with SMTP id tz8csp83075lbb;
+        Sun, 26 May 2013 12:13:35 -0700 (PDT)
+X-Received: by 10.68.106.196 with SMTP id gw4mr26262358pbb.126.1369595615091;
+        Sun, 26 May 2013 12:13:35 -0700 (PDT)
+Return-Path: <bugzilla-daemon@mozilla.org>
+Received: from smtp.mozilla.org (mx2.corp.phx1.mozilla.com. [63.245.216.70])
+        by mx.google.com with ESMTP id pu9si18527277pbb.93.2013.05.26.12.13.34
+        for <blackholebugzilla@gmail.com>;
+        Sun, 26 May 2013 12:13:35 -0700 (PDT)
+Received-SPF: neutral (google.com: 63.245.216.70 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) client-ip=63.245.216.70;
+Authentication-Results: mx.google.com;
+       spf=neutral (google.com: 63.245.216.70 is neither permitted nor denied by best guess record for domain of bugzilla-daemon@mozilla.org) smtp.mail=bugzilla-daemon@mozilla.org
+X-Virus-Scanned: amavisd-new at mozilla.org
+Received: from jobqueue1.bugs.scl3.mozilla.com (nat-bugs.scl3.mozilla.com [63.245.214.161])
+	by mx2.mail.corp.phx1.mozilla.com (Postfix) with ESMTP id 322BBF234B
+	for <blackholebugzilla@gmail.com>; Sun, 26 May 2013 12:13:34 -0700 (PDT)
+Received: by jobqueue1.bugs.scl3.mozilla.com (Postfix, from userid 0)
+	id 1F2EA140E0D; Sun, 26 May 2013 12:13:34 -0700 (PDT)
+From: bugzilla-daemon@mozilla.org
+To: blackholebugzilla@gmail.com
+Subject: [Bug 869432] [eventsource] readyStage on eventsource:close() returns
+ CONNECTING instead of CLOSED
+Date: Sun, 26 May 2013 19:13:28 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: Component-Watcher
+X-Bugzilla-Classification: Components
+X-Bugzilla-ID: 869432
+X-Bugzilla-Product: Core
+X-Bugzilla-Component: DOM
+X-Bugzilla-Version: 23 Branch
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: wfernandom2004@gmail.com
+X-Bugzilla-Status: RESOLVED
+X-Bugzilla-Resolution: FIXED
+X-Bugzilla-Priority: --
+X-Bugzilla-Assigned-To: wfernandom2004@gmail.com
+X-Bugzilla-Target-Milestone: mozilla24
+X-Bugzilla-Flags: in-testsuite+
+X-Bugzilla-OS: All
+X-Bugzilla-Changed-Fields: See Also
+X-Bugzilla-Changed-Field-Names: see_also
+Message-ID: <bug-869432-470714-2I2yYH6x4c@https.bugzilla.mozilla.org/>
+In-Reply-To: <bug-869432-470714@https.bugzilla.mozilla.org/>
+References: <bug-869432-470714@https.bugzilla.mozilla.org/>
+X-Generated-By:
+ web1.bugs.scl3.mozilla.com/jobqueue1.bugs.scl3.mozilla.com(25791)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Bugzilla-URL: https://bugzilla.mozilla.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+
+Do not reply to this email. You can add comments to this bug at
+https://bugzilla.mozilla.org/show_bug.cgi?id=869432
+
+Wellington Fernando de Macedo <wfernandom2004@gmail.com> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+           See Also|https://bugzilla.mozilla.or |
+                   |g/show_bug.cgi?id=869874    |
+
+-- 
+Configure bugmail: https://bugzilla.mozilla.org/userprefs.cgi?tab=email
+
+-------------------------------
+Product/Component: Core :: DOM
+
+
+------- You are receiving this mail because: -------
+You are watching the component for the bug.
+===EXPECTED===
+{'source': 'bugzilla', 'extra': {'component': 'DOM', 'fields': ['see_also'], 'product': 'Core', 'values': {}, 'id': 869432}, 'email': 'wfernandom2004@gmail.com', 'datetime': datetime.datetime(2013, 5, 26, 15, 13, 28)}
