@@ -18,6 +18,7 @@ BUG_ID_RE = re.compile(r'\[Bug (\d+)\]')
 BUG_SUMMARY_RE = re.compile(r'\[Bug (?:\d+)\](?: New:)? (.+)$', re.MULTILINE)
 COMMENT_RE = re.compile(r'--- Comment #(\d+)')
 REVIEW_RE = re.compile(r'Review of attachment (\d+):')
+FEEDBACK_RE = re.compile(r'\|feedback[+-]')
 # 'admin' also comes through but is for account creation.
 BUGZILLA_TYPES = (
     'new',
@@ -165,6 +166,9 @@ def extract_bug_info(msg):
 
     if REVIEW_RE.search(body):
         extra['review'] = True
+
+    if FEEDBACK_RE.search(body):
+        extra['feedback'] = True
 
     return info
 
