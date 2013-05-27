@@ -77,4 +77,4 @@ Product/Component: Firefox :: Untriaged
 ------- You are receiving this mail because: -------
 You are watching the component for the bug.
 ===EXPECTED===
-{'source': 'bugzilla', 'extra': {'component': 'Untriaged', 'fields': ['cf_last_resolved', 'resolution', 'bug_status'], 'product': 'Firefox', 'values': {'bug_status': 'RESOLVED', 'resolution': 'WORKSFORME'}, 'id': 875269}, 'email': 'epinal99-bugzilla@yahoo.fr', 'datetime': datetime.datetime(2013, 5, 26, 16, 17, 58)}
+{'source': 'bugzilla', 'extra': {'comment': True, 'component': 'Untriaged', 'fields': ['cf_last_resolved', 'resolution', 'bug_status'], 'product': 'Firefox', 'values': {'bug_status': 'RESOLVED', 'resolution': 'WORKSFORME'}, 'id': 875269}, 'email': 'epinal99-bugzilla@yahoo.fr', 'datetime': datetime.datetime(2013, 5, 26, 16, 17, 58)}

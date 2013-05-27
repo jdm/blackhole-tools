@@ -79,4 +79,4 @@ Product/Component: Boot2Gecko :: Gaia::Gallery
 ------- You are receiving this mail because: -------
 You are watching the component for the bug.
 ===EXPECTED===
-{'source': 'bugzilla', 'extra': {'component': 'Gaia::Gallery', 'fields': ['cc', 'flagtypes_name', 'status_whiteboard'], 'product': 'Boot2Gecko', 'values': {}, 'id': 799995}, 'email': 'epang@mozilla.com', 'datetime': datetime.datetime(2013, 5, 26, 17, 17, 51)}
+{'source': 'bugzilla', 'extra': {'comment': True, 'component': 'Gaia::Gallery', 'fields': ['cc', 'flagtypes_name', 'status_whiteboard'], 'product': 'Boot2Gecko', 'values': {}, 'id': 799995}, 'email': 'epang@mozilla.com', 'datetime': datetime.datetime(2013, 5, 26, 17, 17, 51)}

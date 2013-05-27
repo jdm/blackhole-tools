@@ -98,4 +98,4 @@ Product/Component: MailNews Core :: Feed Reader
 ------- You are receiving this mail because: -------
 You are watching the component for the bug.=
 ===EXPECTED===
-{'source': 'bugzilla', 'extra': {'component': 'Feed Reader', 'fields': ['assigned_to', 'everconfirmed', 'flagtypes_name', 'bug_status', 'attachment_created'], 'product': 'MailNews Core', 'values': {'bug_status': 'NEW', 'assigned_to': 'alta88@gmail.com'}, 'id': 494797}, 'email': 'alta88@gmail.com', 'datetime': datetime.datetime(2013, 5, 26, 16, 4, 14)}
+{'source': 'bugzilla', 'extra': {'comment': True, 'component': 'Feed Reader', 'fields': ['assigned_to', 'everconfirmed', 'flagtypes_name', 'bug_status', 'attachment_created'], 'product': 'MailNews Core', 'values': {'bug_status': 'NEW', 'assigned_to': 'alta88@gmail.com'}, 'id': 494797}, 'email': 'alta88@gmail.com', 'datetime': datetime.datetime(2013, 5, 26, 16, 4, 14)}

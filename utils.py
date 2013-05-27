@@ -16,6 +16,7 @@ BUGMAIL_USER = config.get('blackhole', 'user')
 BUGMAIL_PASS = config.get('blackhole', 'password')
 BUG_ID_RE = re.compile(r'\[Bug (\d+)\]')
 BUG_SUMMARY_RE = re.compile(r'\[Bug (?:\d+)\](?: New:)? (.+)$', re.MULTILINE)
+COMMENT_RE = re.compile(r'--- Comment #(\d+)')
 # 'admin' also comes through but is for account creation.
 BUGZILLA_TYPES = (
     'new',
@@ -156,6 +157,10 @@ def extract_bug_info(msg):
 
     if msg.get('x-bugzilla-firstpatch'):
         extra['firstpatch'] = True
+
+    body = msg.get_payload(decode=True)
+    if COMMENT_RE.search(body):
+        extra['comment'] = True
 
     return info
 

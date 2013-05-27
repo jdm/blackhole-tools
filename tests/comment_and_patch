@@ -139,4 +139,4 @@ Product/Component: Core :: JavaScript Engine
 ------- You are receiving this mail because: -------
 You are watching the component for the bug.=
 ===EXPECTED===
-{'source': 'bugzilla', 'extra': {'component': 'JavaScript Engine', 'fields': '', 'product': 'Core', 'values': {}, 'id': 866847}, 'email': 'evilpies@gmail.com', 'datetime': datetime.datetime(2013, 5, 26, 17, 13, 24)}
+{'source': 'bugzilla', 'extra': {'comment': True, 'component': 'JavaScript Engine', 'fields': '', 'product': 'Core', 'values': {}, 'id': 866847}, 'email': 'evilpies@gmail.com', 'datetime': datetime.datetime(2013, 5, 26, 17, 13, 24)}
