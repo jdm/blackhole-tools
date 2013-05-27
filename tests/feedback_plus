@@ -100,4 +100,4 @@ Product/Component: Core :: Rewriting and Analysis
 ------- You are receiving this mail because: -------
 You are watching the component for the bug.=
 ===EXPECTED===
-{'source': 'bugzilla', 'extra': {'comment': True, 'component': 'Rewriting and Analysis', 'fields': ['flagtypes_name'], 'product': 'Core', 'values': {}, 'id': 861425}, 'email': 'Pidgeot18@gmail.com', 'datetime': datetime.datetime(2013, 5, 26, 17, 14, 1)}
+{'source': 'bugzilla', 'extra': {'comment': True, 'review': True, 'component': 'Rewriting and Analysis', 'fields': ['flagtypes_name'], 'product': 'Core', 'values': {}, 'id': 861425}, 'email': 'Pidgeot18@gmail.com', 'datetime': datetime.datetime(2013, 5, 26, 17, 14, 1)}

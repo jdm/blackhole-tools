@@ -17,6 +17,7 @@ BUGMAIL_PASS = config.get('blackhole', 'password')
 BUG_ID_RE = re.compile(r'\[Bug (\d+)\]')
 BUG_SUMMARY_RE = re.compile(r'\[Bug (?:\d+)\](?: New:)? (.+)$', re.MULTILINE)
 COMMENT_RE = re.compile(r'--- Comment #(\d+)')
+REVIEW_RE = re.compile(r'Review of attachment (\d+):')
 # 'admin' also comes through but is for account creation.
 BUGZILLA_TYPES = (
     'new',
@@ -161,6 +162,9 @@ def extract_bug_info(msg):
     body = msg.get_payload(decode=True)
     if COMMENT_RE.search(body):
         extra['comment'] = True
+
+    if REVIEW_RE.search(body):
+        extra['review'] = True
 
     return info
 
