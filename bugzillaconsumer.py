@@ -1,5 +1,11 @@
-from utils import get_messages, extract_bug_info
-from bugzillaproducer import publish_message, BugzillaPublisher
+import json
+import email
+import datetime
+from email.parser import Parser
+
+from mozillapulse.config import PulseConfiguration
+from mozillapulse.consumers import GenericConsumer
+from mongotools import MongoConnection
 
 # Default RabbitMQ host settings are as defined in the accompanying
 # vagrant puppet files.
@@ -12,20 +18,39 @@ DEFAULT_RABBIT_PASSWORD = 'pulse'
 # Global pulse configuration.
 pulse_cfg = {}
 
+
+class BugzillaConsumer(GenericConsumer):
+    def __init__(self, **kwargs):
+        super(BugzillaConsumer, self).__init__(PulseConfiguration(**kwargs),
+                                               'org.mozilla.exchange.bugzilla',
+                                               **kwargs)
+
+def on_pulse_message(data, message):
+    with MongoConnection('pulse_test') as conn:
+        all_data = data['payload']
+        print all_data
+        who = all_data['changed_by']
+        all_data.pop('changed_by')
+        when_str = all_data['changed_at']
+        when_tuple = email.utils.parsedate_tz(when_str)
+        when = datetime.datetime.fromtimestamp(email.utils.mktime_tz(when_tuple))
+        all_data.pop('changed_at')
+        source = 'bugzilla'
+        conn.add_contribution(who, when, source, all_data)
+
+
 def main(pulse_opts):
     global pulse_cfg
     pulse_cfg.update(pulse_opts)
-    publisher = BugzillaPublisher(**pulse_cfg)
-
-    count = 0
-    for msg in get_messages():
-        bug_data = extract_bug_info(msg)
-        publish_message(publisher, bug_data, 'org.mozilla.bugzilla.exchange')
-        count += 1
-    print 'Synced %d bug(s) from email' % count
+    pulse_cfg['applabel'] = 'blackhole_bugzilla_consumer'
+    pulse = BugzillaConsumer(**pulse_cfg)
+    pulse.configure(topic='#',
+                    callback=on_pulse_message,
+                    durable=True)
+    pulse.listen()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from optparse import OptionParser
     parser = OptionParser()
     parser.add_option('--host', action='store', dest='host',
@@ -51,18 +76,3 @@ if __name__ == '__main__':
     (opts, args) = parser.parse_args()
     main(opts.__dict__)
 
-# What we want:
-# - email
-# - contribution source
-# - date/time
-
-# For Bugzilla in particular:
-# - product
-# - component
-# - new/changed
-# - bug id
-# - fields changed (array)
-# - value of changed fields?
-# - first patch status?
-# - [X] type of new attachment
-# - [X] flag being changed
