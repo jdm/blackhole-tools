@@ -1,5 +1,4 @@
 import ConfigParser
-from mozillapulse.consumers import MalformedMessage
 from pymongo import MongoClient
 
 def normalize_data(who, when, source, canonical, extra):
