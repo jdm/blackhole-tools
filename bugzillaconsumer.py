@@ -26,7 +26,7 @@ class BugzillaConsumer(GenericConsumer):
                                                **kwargs)
 
 def on_pulse_message(data, message):
-    with MongoConnection('pulse_test') as conn:
+    with MongoConnection() as conn:
         all_data = data['payload']
         print all_data
         who = all_data['changed_by']
@@ -36,8 +36,13 @@ def on_pulse_message(data, message):
         when = datetime.datetime.fromtimestamp(email.utils.mktime_tz(when_tuple))
         all_data.pop('changed_at')
         source = 'bugzilla'
-        conn.add_contribution(who, when, source, all_data)
+        comment = ('#c' + str(all_data['comment'])) if 'comment' in all_data else ''
+        canonical = 'https://bugzilla.mozilla.org/show_bug.cgi?id=%s%s' % (all_data['id'],
+                                                                           comment)
+        conn.add_contribution(who, when, source, canonical, all_data)
 
+        # Remove it from the queue
+        message.ack()
 
 def main(pulse_opts):
     global pulse_cfg

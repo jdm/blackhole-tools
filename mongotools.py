@@ -2,16 +2,17 @@ import ConfigParser
 from mozillapulse.consumers import MalformedMessage
 from pymongo import MongoClient
 
-def normalize_data(who, when, source, extra):
+def normalize_data(who, when, source, canonical, extra):
     return {'email': who,
             'datetime': when,
             'source': source,
+            'canonical': canonical,
             'extra': extra}
 
 DEFAULT_CONFIG = "config"
 
 class MongoConnection(object):
-    def __init__(self, dbname, configfilename=None):
+    def __init__(self, configfilename=None):
         config = ConfigParser.RawConfigParser()
         config.read(configfilename or DEFAULT_CONFIG)
         host = port = None
@@ -20,19 +21,28 @@ class MongoConnection(object):
         except:
             host = None
         try:
-            port = config.get('mongo', 'post')
+            port = int(config.get('mongo', 'port'))
         except:
             port = None
 
         self.client = MongoClient(host=host, port=port)
+
+        dbname = config.get('mongo', 'dbname')
         self.db = self.client[dbname]
 
-    def add_contribution(self, who, when, source, extra):
-        data = normalize_data(who, when, source, extra)
+    def add_contribution(self, who, when, source, canonical, extra):
+        data = {'email': who,
+                'datetime': when,
+                'source': source,
+                'canonical': canonical,
+                'extra': extra}
         self.db.contributions.insert(data)
 
     def add_entrypoint(self, who, when, source, extra):
-        data = normalize_data(who, when, source, extra)
+        data = {'email': who,
+                'datetime': when,
+                'source': source,
+                'extra': extra}
         self.db.entrypoints.insert(data)
 
     def __enter__(self):

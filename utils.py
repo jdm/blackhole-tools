@@ -43,7 +43,7 @@ FIELD_NAME_TO_HEADER_ARRAY = {
 }
 
 
-def get_messages(delete=True, max_get=1):
+def get_messages(delete=True, max_get=1000):
     """
     Return a list of `email.message.Message` objects from the POP3 server.
     :return: list
@@ -53,7 +53,7 @@ def get_messages(delete=True, max_get=1):
         conn = poplib.POP3_SSL(BUGMAIL_HOST)
         conn.user(BUGMAIL_USER)
         conn.pass_(BUGMAIL_PASS)
-        num_messages = len(conn.list()[1])
+        (num_messages, total_size) = conn.stat()
         num_get = min(num_messages, max_get)
         print 'Getting %d bugmails' % num_get
         for msgid in range(1, num_get + 1):
@@ -146,8 +146,9 @@ def extract_bug_info(msg):
         info['firstpatch'] = True
 
     body = msg.get_payload(decode=True)
-    if COMMENT_RE.search(body):
-        info['comment'] = True
+    comment = COMMENT_RE.search(body)
+    if comment:
+        info['comment'] = int(comment.group(1))
 
     if REVIEW_RE.search(body):
         info['review'] = True

@@ -1,7 +1,7 @@
 import os
 import sys
 from datetime import tzinfo, timedelta, datetime
-from pymongo import MongoClient
+from mongotools import MongoConnection
 from git import *
 
 class FixedOffset(tzinfo):
@@ -32,6 +32,8 @@ assert repo.bare == False
 data = []
 tree = filter(lambda x: x is not '', sys.argv[1].split('/'))[-1]
 
+print 'Parsing repository... ',
+
 for commit in repo.iter_commits('master'):
     if last_commit and commit.hexsha in last_commit:
         break
@@ -41,16 +43,22 @@ for commit in repo.iter_commits('master'):
     data.append({'email': email,
                  'datetime': datetime.fromtimestamp(commit_date, FixedOffset(offset)),
                  'source': 'hg',
-                 'extra': {'tree': tree}})
+                 'extra': {'tree': tree},
+                 'sha': commit.hexsha})
 
-print 'Parsed repository.'
+print 'done'
 
-client = MongoClient()
-db = client.test_database
-db.contributions.insert(data)
+with MongoConnection(configfilename='config') as conn:
+    for datum in reversed(data):
+        print 'Inserting ' + datum['sha']
+        conn.add_contribution(who=datum['email'],
+                              when=datum['datetime'],
+                              source=datum['source'],
+                              canonical='https://github.com/mozilla/mozilla-central/commit/' + datum['sha'],
+                              extra=datum['extra'])
+        f = open('last_commit', 'wb')
+        f.write(datum['sha'])
+        f.close()
 
 print 'Updated database'
 
-f = open('last_commit', 'wb')
-f.write(repo.commit('master').hexsha)
-f.close()
