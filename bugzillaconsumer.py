@@ -1,4 +1,3 @@
-import json
 import email
 import datetime
 from email.parser import Parser
