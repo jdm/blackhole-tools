@@ -7,6 +7,7 @@ import datetime
 import email
 import ConfigParser
 from email.parser import Parser
+from BeautifulSoup import BeautifulSoup
 
 config = ConfigParser.ConfigParser()
 config.read('config')
@@ -15,8 +16,10 @@ BUGMAIL_HOST = config.get('blackhole', 'host')
 BUGMAIL_USER = config.get('blackhole', 'user')
 BUGMAIL_PASS = config.get('blackhole', 'password')
 BUG_ID_RE = re.compile(r'\[Bug (\d+)\]')
-BUG_SUMMARY_RE = re.compile(r'\[Bug (?:\d+)\](?: New:)? (.+)$', re.MULTILINE)
-COMMENT_RE = re.compile(r'--- Comment #(\d+)')
+BUG_SUMMARY_RE = re.compile(r'\[Bug (?:\d+)\](?: New:)? (.+)$', re.DOTALL)
+COMMENT_RE = re.compile(r'Comment # (\d+)')
+ATTACHMENT_FLAG_RE = re.compile(r'Attachment #(\d+) Flags')
+ATTACHMENT_CREATE_RE = re.compile(r'Created attachment (\d+) \[details\]( \[diff\] \[review\])?')
 REVIEW_RE = re.compile(r'Review of attachment (\d+):')
 FEEDBACK_RE = re.compile(r'\|feedback[+-]')
 NEEDINFO_RE = re.compile(r'\|needinfo[+-]')
@@ -30,7 +33,7 @@ FIELD_NAME_TO_HEADER = {
     'resolution': 'x-bugzilla-resolution',
     'bug_status': 'x-bugzilla-status',
     'assigned_to': 'x-bugzilla-assigned-to',
-    'severity': 'x-bugzilla-severity',
+    'bug_severity': 'x-bugzilla-severity',
     'version': 'x-bugzilla-version',
     'op_sys': 'x-bugzilla-os',
     'priority': 'x-bugzilla-priority',
@@ -39,7 +42,7 @@ FIELD_NAME_TO_HEADER = {
 
 FIELD_NAME_TO_HEADER_ARRAY = {
     'keywords': 'x-bugzilla-keywords',
-    'flagtypes.name': 'x-bugzilla-flags'
+#    'flagtypes.name': 'x-bugzilla-flags'
 }
 
 
@@ -118,19 +121,20 @@ def extract_bug_info(msg):
     def sanitize(s):
         return s.replace('.', '_').replace('-', '_')
 
+    values = {}
+
     # Array of uniquely-named modified field names 
     fields = msg.get('x-bugzilla-changed-field-names')
     if fields:
-        fields = map(sanitize, fields.split())
-    info['fields'] = fields
-    
-    values = {}
-    for field in fields:
-        sanitized = sanitize(field)
-        if field in FIELD_NAME_TO_HEADER:
-            values[sanitized] = msg.get(FIELD_NAME_TO_HEADER[field])
-        elif field in FIELD_NAME_TO_HEADER_ARRAY:
-            values[sanitized] = map(sanitize, msg.get(FIELD_NAME_TO_HEADER_ARRAY[field]).split())
+        fields = fields.split()
+        info['fields'] = map(sanitize, fields)
+        for field in fields:
+            sanitized = sanitize(field)
+            if field in FIELD_NAME_TO_HEADER:
+                values[sanitized] = msg.get(FIELD_NAME_TO_HEADER[field])
+            elif field in FIELD_NAME_TO_HEADER_ARRAY:
+                values[sanitized] = map(sanitize, msg.get(FIELD_NAME_TO_HEADER_ARRAY[field]).split())
+
     info['values'] = values
 
     info['id'] = get_bug_id(msg)
@@ -145,19 +149,79 @@ def extract_bug_info(msg):
     if msg.get('x-bugzilla-firstpatch'):
         info['firstpatch'] = True
 
-    body = msg.get_payload(decode=True)
-    comment = COMMENT_RE.search(body)
-    if comment:
-        info['comment'] = int(comment.group(1))
+    body = msg.get_payload(decode=(not msg.is_multipart()))
+    if isinstance(body, list):
+        for part in msg.walk():
+            if part.get_content_type() == 'text/html':
+                body = part.get_payload(decode=True)
+                break
 
-    if REVIEW_RE.search(body):
-        info['review'] = True
+    document = BeautifulSoup(body, convertEntities=BeautifulSoup.HTML_ENTITIES)
 
-    if FEEDBACK_RE.search(body):
-        info['feedback'] = True
+    field_conversions = {
+        'blocking-b2g': 'cf_blocking_b2g',
+        'status-firefox23': 'cf_status_firefox23'
+    }
 
-    if NEEDINFO_RE.search(body):
-        info['needinfo'] = True
+    diffs = document.find('div', {'class':'diffs'})
+    if diffs:
+        all_diffs = diffs.table.findAll('tr')[1:]
+        for diff in all_diffs:
+            entries = diff.findAll('td')
+            kind = entries[0].string
+            removed = entries[1].string.strip()
+            added = entries[2].string.strip()
 
+            if added and (ATTACHMENT_FLAG_RE.match(kind) or kind == 'Flags'):
+                if 'flagtypes_name' not in info['values']:
+                    info['values']['flagtypes_name'] = []
+                info['values']['flagtypes_name'] += [added]
+
+            elif kind == 'Whiteboard':
+                if added.find('mentor=') != -1:
+                    info['mentored'] = True
+                info['values']['status_whiteboard'] = added
+
+            else:
+                bug_flags = ['status-', 'blocking-', 'tracking-']
+                present_flags = filter(lambda x: kind.find(x) != -1, bug_flags)
+                if present_flags:
+                    info['values']['cf_' + kind.replace('-', '_')] = added
+            #print '%s: %s' % (kind, added)
+
+    summary = BUG_SUMMARY_RE.search(msg['subject']).groups()[-1].replace('\r\n', '')
+    info['summary'] = summary
+
+    comments = document.find(id='comments')
+    if comments:
+        # get the comment number and author name
+        if 'new' not in info:
+            info['comment'] = int(COMMENT_RE.search(comments.find('a').string).group(1))
+
+        # check for new attachments
+        content = ''.join(comments.div.pre.findAll(text=True))
+        attachment = ATTACHMENT_CREATE_RE.search(content)
+        if attachment:
+            # new patch ([diff] present)?
+            if len(attachment.groups()) > 1:
+                info['patch'] = True
+            info['values']['attachment_created'] = attachment.group(1)
+        #print content
+
+    if 'new' in info:
+        fields = document.findAll('td', {'class': 'c1'})
+        for field in fields:
+            attachment = ATTACHMENT_FLAG_RE.search(field.b.string)
+            if attachment:
+                info['values']['attachment_created'] = attachment.group(1)
+                sibling = field.parent.find('td', {'class':'c2'})
+                info['values']['flagtypes_name'] = [sibling.string.strip()]
+
+    author = document.find('span', {'class': 'vcard'})
+    if author:
+        author_info = author.find('span', {'class': 'fn'})
+        if author_info:
+            info['author_name'] = author_info.string
+    
     return info
 

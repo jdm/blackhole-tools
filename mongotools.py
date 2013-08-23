@@ -1,11 +1,12 @@
 import ConfigParser
 from pymongo import MongoClient
 
-def normalize_data(who, when, source, canonical, extra):
+def normalize_data(who, when, source, canonical, volunteer, extra):
     return {'email': who,
             'datetime': when,
             'source': source,
             'canonical': canonical,
+            'volunteer': volunteer,
             'extra': extra}
 
 DEFAULT_CONFIG = "config"
@@ -29,11 +30,12 @@ class MongoConnection(object):
         dbname = config.get('mongo', 'dbname')
         self.db = self.client[dbname]
 
-    def add_contribution(self, who, when, source, canonical, extra):
+    def add_contribution(self, who, when, source, canonical, volunteer, extra):
         data = {'email': who,
                 'datetime': when,
                 'source': source,
                 'canonical': canonical,
+                'volunteer': volunteer,
                 'extra': extra}
         self.db.contributions.insert(data)
 
