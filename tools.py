@@ -9,14 +9,26 @@ DEFAULT_CONFIG = "config"
 config = ConfigParser.RawConfigParser()
 config.read(DEFAULT_CONFIG)
 
+employees = None
+emails = None
+names = None
+
 def classify_volunteer(author):
-    with open(config.get('employee_data', 'filename')) as f:
-        employees = json.load(f)[u'Report_Entry']
-        employees = filter(lambda x: u'primaryWorkEmail' in x, employees)
-        emails = map(lambda x: x[u'primaryWorkEmail'], employees)
-        names = map(lambda x: (sanitize(x[u'Preferred_Name_-_First_Name']),
-                          sanitize(x[u'Preferred_Name_-_Last_Name'])),
-                    employees)
+    global employees, emails, names
+    if not employees:
+        with open(config.get('employee_data', 'filename')) as f:
+            employees = json.load(f)[u'Report_Entry']
+            employees = filter(lambda x: u'primaryWorkEmail' in x, employees)
+            emails = map(lambda x: x[u'primaryWorkEmail'], employees)
+            names = map(lambda x: (sanitize(x[u'Preferred_Name_-_First_Name']),
+                              sanitize(x[u'Preferred_Name_-_Last_Name'])),
+                        employees)
+
+            with open(config.get('employee_data', 'extra_emails')) as f:
+                lines = f.readlines()
+                if not lines[-1].split():
+                    lines.pop()
+                emails += map(lambda x: x.split()[0], lines)
 
     for (first, last) in names:
         if last in author:

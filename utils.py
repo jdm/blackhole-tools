@@ -7,6 +7,7 @@ import datetime
 import email
 import ConfigParser
 from email.parser import Parser
+from email.header import decode_header
 from BeautifulSoup import BeautifulSoup
 
 config = ConfigParser.ConfigParser()
@@ -16,7 +17,7 @@ BUGMAIL_HOST = config.get('blackhole', 'host')
 BUGMAIL_USER = config.get('blackhole', 'user')
 BUGMAIL_PASS = config.get('blackhole', 'password')
 BUG_ID_RE = re.compile(r'\[Bug (\d+)\]')
-BUG_SUMMARY_RE = re.compile(r'\[Bug (?:\d+)\](?: New:)? (.+)$', re.DOTALL)
+BUG_SUMMARY_RE = re.compile(r'\[Bug (?:\d+)\](?: New:)?\s+(.+)', re.DOTALL)
 COMMENT_RE = re.compile(r'Comment # (\d+)')
 ATTACHMENT_FLAG_RE = re.compile(r'Attachment #(\d+) Flags')
 ATTACHMENT_CREATE_RE = re.compile(r'Created attachment (\d+) \[details\]( \[diff\] \[review\])?')
@@ -158,11 +159,6 @@ def extract_bug_info(msg):
 
     document = BeautifulSoup(body, convertEntities=BeautifulSoup.HTML_ENTITIES)
 
-    field_conversions = {
-        'blocking-b2g': 'cf_blocking_b2g',
-        'status-firefox23': 'cf_status_firefox23'
-    }
-
     diffs = document.find('div', {'class':'diffs'})
     if diffs:
         all_diffs = diffs.table.findAll('tr')[1:]
@@ -186,10 +182,20 @@ def extract_bug_info(msg):
                 bug_flags = ['status-', 'blocking-', 'tracking-']
                 present_flags = filter(lambda x: kind.find(x) != -1, bug_flags)
                 if present_flags:
-                    info['values']['cf_' + kind.replace('-', '_')] = added
+                    info['values']['cf_' + sanitize(kind)] = added
             #print '%s: %s' % (kind, added)
 
-    summary = BUG_SUMMARY_RE.search(msg['subject']).groups()[-1].replace('\r\n', '')
+    header_value = msg['subject']
+
+    # see http://stackoverflow.com/questions/7331351/python-email-header-decoding-utf-8
+    if not BUG_SUMMARY_RE.search(header_value):
+        default_charset = 'ASCII'
+        header_value = re.sub(r"(=\?.*\?=)(?!$)", r"\1 ", header_value)
+        dh = decode_header(header_value)
+        header_value = ' '.join([ unicode(t[0], t[1] or default_charset) for t in dh ])
+        #print header_value
+
+    summary = BUG_SUMMARY_RE.search(header_value).groups()[-1].replace('\r\n', '')
     info['summary'] = summary
 
     comments = document.find(id='comments')
@@ -222,6 +228,9 @@ def extract_bug_info(msg):
         author_info = author.find('span', {'class': 'fn'})
         if author_info:
             info['author_name'] = author_info.string
+        else:
+            #print author
+            pass
     
     return info
 
