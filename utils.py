@@ -144,6 +144,8 @@ def extract_bug_info(msg):
 
     info['component'] = msg.get('x-bugzilla-component')
 
+    info['assignee'] = msg.get('x-bugzilla-assigned-to')
+
     if msg.get('x-bugzilla-type') == 'new':
         info['new'] = True
 

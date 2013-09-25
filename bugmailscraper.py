@@ -19,6 +19,8 @@ with MongoConnection() as conn:
             all_data.pop('author_name')
         volunteer = classify_volunteer(author_info)
 
+        all_data['volunteer_assignee'] = classify_volunteer(all_data('assignee'))
+
         when_str = all_data['changed_at']
         when_tuple = email.utils.parsedate_tz(when_str)
         when = datetime.datetime.fromtimestamp(email.utils.mktime_tz(when_tuple))

@@ -25,9 +25,7 @@ def classify_volunteer(author):
                         employees)
 
             with open(config.get('employee_data', 'extra_emails')) as f:
-                lines = f.readlines()
-                if not lines[-1].split():
-                    lines.pop()
+                lines = filter(lambda x: x.split(), f.readlines())
                 emails += map(lambda x: x.split()[0], lines)
 
     for (first, last) in names:
