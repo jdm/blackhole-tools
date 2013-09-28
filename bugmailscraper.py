@@ -8,7 +8,10 @@ from tools import classify_volunteer
 with MongoConnection() as conn:
     count = 0
     for msg in get_messages():
-        all_data = extract_bug_info(msg)
+        try:
+            all_data = extract_bug_info(msg)
+        except:
+            continue
 
         who = all_data['changed_by']
         all_data.pop('changed_by')
@@ -19,7 +22,7 @@ with MongoConnection() as conn:
             all_data.pop('author_name')
         volunteer = classify_volunteer(author_info)
 
-        all_data['volunteer_assignee'] = classify_volunteer(all_data('assignee'))
+        all_data['volunteer_assignee'] = classify_volunteer(all_data['assignee'])
 
         when_str = all_data['changed_at']
         when_tuple = email.utils.parsedate_tz(when_str)
