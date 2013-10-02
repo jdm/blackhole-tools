@@ -41,6 +41,7 @@ for commit in repo.iter_commits('master'):
     commit_date = commit.committed_date
     offset = commit.committer_tz_offset / 3600
     data.append({'email': email,
+                 'name': commit.author.name,
                  'datetime': datetime.fromtimestamp(commit_date, FixedOffset(offset)),
                  'source': 'hg',
                  'extra': {'tree': tree},
@@ -55,6 +56,7 @@ with MongoConnection(configfilename='config') as conn:
                               when=datum['datetime'],
                               source=datum['source'],
                               canonical='https://github.com/mozilla/mozilla-central/commit/' + datum['sha'],
+                              volunteer=classify_volunteer('%s <%s>' % (datum['name'], datum['email'])),
                               extra=datum['extra'])
         f = open('last_commit', 'wb')
         f.write(datum['sha'])
