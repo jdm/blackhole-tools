@@ -2,6 +2,7 @@ import os
 import sys
 from datetime import tzinfo, timedelta, datetime
 from mongotools import MongoConnection
+from tools import classify_volunteer
 from git import *
 
 class FixedOffset(tzinfo):
