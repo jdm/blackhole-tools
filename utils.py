@@ -211,8 +211,9 @@ def extract_bug_info(msg):
         attachment = ATTACHMENT_CREATE_RE.search(content)
         if attachment:
             # new patch ([diff] present)?
-            if len(attachment.groups()) > 1:
+            if attachment.group(2):
                 info['patch'] = True
+            info['attachment'] = True
             info['values']['attachment_created'] = attachment.group(1)
         #print content
 
